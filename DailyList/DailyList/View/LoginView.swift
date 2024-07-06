@@ -101,25 +101,10 @@ final class LoginView: UIView {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.endEditing(true)
   }
-  
-  @objc private func loginButtonEnabled(_ textfield: UITextField) {
-    guard
-      let email = emailTextField.text,
-      let password = passwordTextField.text
-    else {
-      return
-    }
-    
-    if !email.isEmpty && !password.isEmpty {
-      loginButton.layer.opacity = 1
-      loginButton.isEnabled = true
-    } else {
-      loginButton.layer.opacity = 0.2
-      loginButton.isEnabled = false
-    }
-  }
-  
-  // MARK: AutoLayout
+}
+
+// MARK: AutoLayout
+extension LoginView {
   private func setAutoLayout() {
     loginLabel.translatesAutoresizingMaskIntoConstraints = false
     textFieldStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,5 +134,25 @@ final class LoginView: UIView {
       loginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
       loginButton.heightAnchor.constraint(equalToConstant: 60)
     ])
+  }
+}
+
+//MARK: - Function
+extension LoginView {
+  @objc private func loginButtonEnabled(_ textfield: UITextField) {
+    guard
+      let email = emailTextField.text,
+      let password = passwordTextField.text
+    else {
+      return
+    }
+    
+    if !email.isEmpty && !password.isEmpty {
+      loginButton.layer.opacity = 1
+      loginButton.isEnabled = true
+    } else {
+      loginButton.layer.opacity = 0.2
+      loginButton.isEnabled = false
+    }
   }
 }
