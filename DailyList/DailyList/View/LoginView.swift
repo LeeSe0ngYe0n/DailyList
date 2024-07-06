@@ -137,6 +137,21 @@ extension LoginView {
   }
 }
 
+// MARK: - Add Target
+extension LoginView {
+  func setForgotPasswordButtonTarget(target: Any?, action: Selector, for event: UIControl.Event) {
+    forgotPasswordButton.addTarget(target, action: action, for: event)
+  }
+  
+  func setNewCustomerButton(target: Any?, action: Selector, for event: UIControl.Event) {
+    newCustomerButton.addTarget(target, action: action, for: event)
+  }
+  
+  func setLoginButtonTarget(target: Any?, action: Selector, for event: UIControl.Event) {
+    loginButton.addTarget(target, action: action, for: event)
+  }
+}
+
 //MARK: - Function
 extension LoginView {
   @objc private func loginButtonEnabled(_ textfield: UITextField) {
