@@ -42,6 +42,7 @@
 		9B2828822C4BAA0D00563B5A /* ColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2828812C4BAA0D00563B5A /* ColorName.swift */; };
 		9B2828842C4BAB6B00563B5A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2828832C4BAB6B00563B5A /* CalendarView.swift */; };
 		9B2828862C4BABD900563B5A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2828852C4BABD900563B5A /* CalendarViewController.swift */; };
+		9B2828882C4BAD2F00563B5A /* CalendarViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2828872C4BAD2F00563B5A /* CalendarViewControllerDelegate.swift */; };
 		9B55BF402C38C5F8007FFA89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BF3F2C38C5F8007FFA89 /* AppDelegate.swift */; };
 		9B55BF422C38C5F8007FFA89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BF412C38C5F8007FFA89 /* SceneDelegate.swift */; };
 		9B55BF442C38C5F8007FFA89 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BF432C38C5F8007FFA89 /* LoginViewController.swift */; };
@@ -88,6 +89,7 @@
 		9B2828812C4BAA0D00563B5A /* ColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorName.swift; sourceTree = "<group>"; };
 		9B2828832C4BAB6B00563B5A /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		9B2828852C4BABD900563B5A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		9B2828872C4BAD2F00563B5A /* CalendarViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewControllerDelegate.swift; sourceTree = "<group>"; };
 		9B55BF3C2C38C5F8007FFA89 /* DailyList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B55BF3F2C38C5F8007FFA89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B55BF412C38C5F8007FFA89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				9B2828772C4BA91A00563B5A /* AddCategoryDelegate.swift */,
 				9B2828792C4BA93000563B5A /* AddTodoViewControllerDelegate.swift */,
+				9B2828872C4BAD2F00563B5A /* CalendarViewControllerDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				9B2828512C4BA67200563B5A /* CategoryViewController.swift in Sources */,
 				9B28286E2C4BA86600563B5A /* TodoData.swift in Sources */,
 				9B55BF442C38C5F8007FFA89 /* LoginViewController.swift in Sources */,
+				9B2828882C4BAD2F00563B5A /* CalendarViewControllerDelegate.swift in Sources */,
 				9B28286A2C4BA83500563B5A /* CategoryData.swift in Sources */,
 				9B2828492C4BA5F800563B5A /* DetailCategoryCell.swift in Sources */,
 				9B2828612C4BA78F00563B5A /* NetworkServiceProtocol.swift in Sources */,
