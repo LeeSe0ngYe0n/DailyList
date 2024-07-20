@@ -25,6 +25,19 @@ private extension AddTodoViewController {
   func setButtonAddTarget() {
     addTodoView.setCancelButtonTarget(target: self, action: #selector(tappedCancelButton), for: .touchUpInside)
     addTodoView.setAddTodoButtonTarget(target: self, action: #selector(tappedAddTodoButton), for: .touchUpInside)
+    addTodoView.setSelectDateButtonTarget(target: self, action: #selector(tappedSelectDateButton), for: .touchUpInside)
+  }
+  
+  @objc private func tappedSelectDateButton() {
+    let calendarViewController: CalendarViewController = CalendarViewController()
+    if let sheet = calendarViewController.sheetPresentationController {
+      sheet.detents = [.medium(), .large()]
+      sheet.largestUndimmedDetentIdentifier = .medium
+      sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+      sheet.prefersEdgeAttachedInCompactHeight = true
+      sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+    }
+    present(calendarViewController, animated: true, completion: nil)
   }
   
   @objc private func tappedCancelButton() {
