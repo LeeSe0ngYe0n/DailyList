@@ -12,7 +12,7 @@ final class LoginView: UIView {
   }()
   
   private lazy var emailTextField: TextFieldUnderline = {
-    let tf: TextFieldUnderline = TextFieldUnderline(frame: CGRect(x: 50, y: 50, width: 300, height: 30))
+    let tf = TextFieldUnderline()
     tf.placeholder = "Email"
     tf.keyboardType = .emailAddress
     tf.autocorrectionType = .no
@@ -23,7 +23,7 @@ final class LoginView: UIView {
   }()
   
   private lazy var passwordTextField: TextFieldUnderline = {
-    let tf: TextFieldUnderline = TextFieldUnderline(frame: CGRect(x: 50, y: 50, width: 300, height: 30))
+    let tf = TextFieldUnderline()
     tf.placeholder = "Password"
     tf.keyboardType = .default
     tf.autocorrectionType = .no
@@ -92,6 +92,7 @@ final class LoginView: UIView {
     super.init(frame: frame)
     self.backgroundColor = .white
     setAutoLayout()
+    setTextFieldDelegate()
   }
   
   required init?(coder: NSCoder) {
@@ -101,10 +102,30 @@ final class LoginView: UIView {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.endEditing(true)
   }
-}
-
-// MARK: AutoLayout
-extension LoginView {
+  
+  private func setTextFieldDelegate() {
+    emailTextField.delegate = self
+    passwordTextField.delegate = self
+  }
+  
+  @objc private func loginButtonEnabled(_ textfield: UITextField) {
+    guard
+      let email = emailTextField.text,
+      let password = passwordTextField.text
+    else {
+      return
+    }
+    
+    if !email.isEmpty && !password.isEmpty {
+      loginButton.layer.opacity = 1
+      loginButton.isEnabled = true
+    } else {
+      loginButton.layer.opacity = 0.2
+      loginButton.isEnabled = false
+    }
+  }
+  
+  // MARK: AutoLayout
   private func setAutoLayout() {
     loginLabel.translatesAutoresizingMaskIntoConstraints = false
     textFieldStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -137,6 +158,14 @@ extension LoginView {
   }
 }
 
+// MARK: TextField Delegate
+extension LoginView: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+}
+
 // MARK: - Add Target
 extension LoginView {
   func setForgotPasswordButtonTarget(target: Any?, action: Selector, for event: UIControl.Event) {
@@ -152,22 +181,27 @@ extension LoginView {
   }
 }
 
-//MARK: - Function
+// MARK: - Function
 extension LoginView {
-  @objc private func loginButtonEnabled(_ textfield: UITextField) {
-    guard
-      let email = emailTextField.text,
-      let password = passwordTextField.text
-    else {
-      return
-    }
-    
-    if !email.isEmpty && !password.isEmpty {
-      loginButton.layer.opacity = 1
-      loginButton.isEnabled = true
-    } else {
-      loginButton.layer.opacity = 0.2
-      loginButton.isEnabled = false
-    }
+  func textFieldTextClear() {
+    checkEmailAndPasswordLabel.text = ""
+    emailTextField.text = ""
+    passwordTextField.text = ""
+    loginButton.isEnabled = false
+    loginButton.layer.opacity = 0.2
+    loginButton.layer.masksToBounds = true
+  }
+  
+  func getEmailText() -> String? {
+    return emailTextField.text
+  }
+  
+  func getPasswordText() -> String? {
+    return passwordTextField.text
+  }
+  
+  func getCheckEmailAndPasswordPhrase() {
+    checkEmailAndPasswordLabel.text = "! Please check your Email and Password."
   }
 }
+
