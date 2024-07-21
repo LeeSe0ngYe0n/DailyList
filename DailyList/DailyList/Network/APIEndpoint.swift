@@ -77,7 +77,14 @@ struct AddTodoEndpoint: APIEndpointProtocol {
   }
   
   var body: Data? {
-    return try? JSONEncoder().encode(addTodoData)
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+    do {
+      return try encoder.encode(addTodoData)
+    } catch {
+      print("Error encoding addTodoData: \(error)")
+      return nil
+    }
   }
 }
 
