@@ -1,8 +1,5 @@
-//
-//  CalendarViewDelegate.swift
-//  DailyList
-//
-//  Created by LeeSeongYeon on 7/20/24.
-//
-
 import Foundation
+
+protocol CalendarViewDelegate: AnyObject {
+    func didTapDate(_ date: Date)
+}
