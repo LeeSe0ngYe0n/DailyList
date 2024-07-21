@@ -46,7 +46,6 @@ extension LoginViewController {
       do {
         let responseData = try await NetworkService.shared.makeURLRequest(endpoint: endpoint)
         let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: responseData)
-        print("userId - ",loginResponse.userId)
         if loginResponse.message == "Login successful" {
           UserDefaults.standard.set(loginResponse.userId, forKey: "user_id")
           loginView.textFieldTextClear()
