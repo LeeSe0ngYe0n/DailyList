@@ -1,11 +1,16 @@
 import UIKit
 
 final class AddTodoView: UIView {
+  var selectedDate: Date? {
+    didSet {
+      updateSelectedDateLabel()
+    }
+  }
+  
   lazy var cancelButton: UIButton = {
     let bt: UIButton = UIButton()
     bt.setTitle("Cancel", for: .normal)
     bt.setTitleColor(.black, for: .normal)
-    self.addSubview(bt)
     return bt
   }()
   
@@ -13,8 +18,23 @@ final class AddTodoView: UIView {
     let bt: UIButton = UIButton()
     bt.setImage(UIImage(systemName: "calendar.badge.plus"), for: .normal)
     bt.tintColor = .black
-    self.addSubview(bt)
     return bt
+  }()
+  
+  private lazy var selectedDateLabel: UILabel = {
+    let label = UILabel()
+    label.font = .preferredFont(forTextStyle: .body)
+    label.textColor = .black
+    label.text = Date.todayAsString()
+    return label
+  }()
+  
+  private lazy var topStackView: UIStackView = {
+    let st: UIStackView = UIStackView(arrangedSubviews: [selectDateButton, selectedDateLabel, cancelButton])
+    st.axis = .horizontal
+    st.distribution = .equalSpacing
+    self.addSubview(st)
+    return st
   }()
   
   lazy var todoTextView: UITextView = {
@@ -53,19 +73,16 @@ final class AddTodoView: UIView {
   }
   
   private func setAutolayout() {
-    cancelButton.translatesAutoresizingMaskIntoConstraints = false
-    selectDateButton.translatesAutoresizingMaskIntoConstraints = false
+    topStackView.translatesAutoresizingMaskIntoConstraints = false
     todoTextView.translatesAutoresizingMaskIntoConstraints = false
     addTodoButton.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      selectDateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15),
-      selectDateButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
+      topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15),
+      topStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
+      topStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
       
-      cancelButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15),
-      cancelButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
-      
-      todoTextView.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 16),
+      todoTextView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 16),
       todoTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
       todoTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
       
@@ -103,5 +120,15 @@ extension AddTodoView: UITextViewDelegate {
       addTodoButton.layer.opacity = 0.2
       addTodoButton.isEnabled = false
     }
+  }
+}
+
+// MARK: - Function
+extension AddTodoView {
+  private func updateSelectedDateLabel() {
+    guard let date = selectedDate else { return }
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    selectedDateLabel.text = dateFormatter.string(from: date)
   }
 }
