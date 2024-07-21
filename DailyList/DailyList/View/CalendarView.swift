@@ -1,6 +1,8 @@
 import UIKit
 
 final class CalendarView: UIView {
+  weak var delegate: CalendarViewDelegate?
+  
   private lazy var datePicker = {
     let dp: UIDatePicker = UIDatePicker()
     dp.datePickerMode = .date
@@ -40,6 +42,7 @@ extension CalendarView {
 // MARK: - AddTarget
 extension CalendarView {
   @objc func tappedDate() {
+    delegate?.didTapDate(datePicker.date)
     print(datePicker.date)
   }
 }
