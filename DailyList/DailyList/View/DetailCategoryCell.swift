@@ -23,7 +23,6 @@ final class DetailCategoryCell: UITableViewCell {
   private lazy var overdueLabel: UILabel = {
     let lb: UILabel = UILabel()
     lb.textColor = .black
-    lb.text = "임시값"
     lb.font = .preferredFont(forTextStyle: .footnote)
     contentView.addSubview(lb)
     return lb
@@ -41,25 +40,29 @@ final class DetailCategoryCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     checkBox.isSelected = false
-    todoLabel.text = nil
+    // attributedText를 먼저 nil로 초기화 해주지 않으면 UI 적으로 문제가 생김 -> 기존에는 attributedText 보다 todoLabel.text를 먼저 nil 값으로 초기화 해줌.
     todoLabel.attributedText = nil
+    todoLabel.text = nil
     todoLabel.textColor = nil
     checkBox.tintColor = nil
-    overdueLabel.text = nil
+//    overdueLabel.text = nil
+    
   }
   
-  // title을 다 넣어주는게 맞나? -> 해결 완료 -> 여러번 누르면 다시 문제가 발생한다.
   func configure(with todo: TodoData, isChecked: Bool, indexPath: IndexPath, target: Any, action: Selector) {
-    todoLabel.text = todo.title
+    todoLabel.attributedText = NSAttributedString(string: todo.title)
+//    todoLabel.text = todo.title
     
     if todo.isCompleted {
-//      todoLabel.attributedText = String().strikeThrough() // 바보같이 여기서 빈 문자열로 만들어 주고 있었음
       todoLabel.attributedText = todo.title.strikeThrough()
       todoLabel.textColor = .systemGray3
       checkBox.tintColor = .systemGray3
+      overdueLabel.textColor = .systemGray3
       checkBox.isSelected = true
     } else {
+      
       todoLabel.textColor = .black
+      overdueLabel.textColor = .black
       checkBox.tintColor = .black
       checkBox.isSelected = false
     }
@@ -67,6 +70,24 @@ final class DetailCategoryCell: UITableViewCell {
     checkBox.tag = indexPath.row
     checkBox.removeTarget(nil, action: nil, for: .allEvents)
     checkBox.addTarget(target, action: action, for: .touchUpInside)
+    
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "MM월 dd일"
+//    
+//    let today = Date()
+//    let calendar = Calendar.current
+//    
+//    let isOverdue = today > todo.dueDate
+//    if isOverdue {
+//      let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
+//      if calendar.isDate(todo.dueDate, inSameDayAs: yesterday) {
+//        overdueLabel.text = "어제"
+//      } else {
+//        overdueLabel.text = formatter.string(from: todo.dueDate)
+//      }
+//    } else {
+//      overdueLabel.text = formatter.string(from: todo.dueDate)
+//    }
   }
 }
 
