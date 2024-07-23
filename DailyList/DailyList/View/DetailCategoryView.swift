@@ -75,8 +75,8 @@ final class DetailCategoryView: UIView {
 
 // MARK: - AutoLayout
 extension DetailCategoryView {
-  func setAutoLayout(todoCount: Int) {
-    if todoCount == 0 {
+  func setAutoLayout(todos: [TodoData]) {
+    if todos.isEmpty {
       emptyTodoSetAutoLayout()
     } else {
       hasTodoSetAutoLayout()
