@@ -1,7 +1,7 @@
 import UIKit
 
 final class ForgotPasswordView: UIView {
-  lazy var cancelButton: UIButton = {
+  private lazy var cancelButton: UIButton = {
     let bt: UIButton = UIButton()
     bt.setTitle("Cancel", for: .normal)
     bt.setTitleColor(.black, for: .normal)
@@ -9,7 +9,7 @@ final class ForgotPasswordView: UIView {
     return bt
   }()
   
-  lazy var mainLabel: UILabel = {
+  private lazy var mainLabel: UILabel = {
     let lb: UILabel = UILabel()
     lb.text = "Reset your password"
     lb.font = .preferredFont(forTextStyle: .title1)
@@ -18,7 +18,7 @@ final class ForgotPasswordView: UIView {
     return lb
   }()
   
-  lazy var subLabel: UILabel = {
+  private lazy var subLabel: UILabel = {
     let lb: UILabel = UILabel()
     lb.numberOfLines = 4
     lb.font = .preferredFont(forTextStyle: .footnote)
@@ -28,7 +28,7 @@ final class ForgotPasswordView: UIView {
     return lb
   }()
   
-  lazy var emailTextField: TextFieldUnderline = {
+  private lazy var emailTextField: TextFieldUnderline = {
     let tf = TextFieldUnderline()
     tf.placeholder = "Email"
     tf.autocorrectionType = .no
@@ -38,7 +38,7 @@ final class ForgotPasswordView: UIView {
     return tf
   }()
 
-  lazy var sendButton: CustomButton = {
+  private lazy var sendButton: CustomButton = {
     let bt = CustomButton(title: "Send")
     self.addSubview(bt)
     return bt
@@ -74,6 +74,11 @@ final class ForgotPasswordView: UIView {
     }
   }
   
+
+}
+
+// MARK: - Autolayout
+extension ForgotPasswordView {
   func setAutolayout() {
     cancelButton.translatesAutoresizingMaskIntoConstraints = false
     mainLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -105,3 +110,13 @@ final class ForgotPasswordView: UIView {
   }
 }
 
+// MARK: - AddTarget
+extension ForgotPasswordView {
+  func setCancelButtonTarget(target: Any?, action: Selector, for event: UIControl.Event) {
+    cancelButton.addTarget(target, action: action, for: event)
+  }
+  
+  func setSendButtonTarget(target: Any?, action: Selector, for event: UIControl.Event) {
+    sendButton.addTarget(target, action: action, for: event)
+  }
+}

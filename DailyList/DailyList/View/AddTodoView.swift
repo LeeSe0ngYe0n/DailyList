@@ -7,7 +7,7 @@ final class AddTodoView: UIView {
     }
   }
   
-  lazy var cancelButton: UIButton = {
+  private lazy var cancelButton: UIButton = {
     let bt: UIButton = UIButton()
     bt.setTitle("Cancel", for: .normal)
     bt.setTitleColor(.black, for: .normal)
@@ -37,7 +37,7 @@ final class AddTodoView: UIView {
     return st
   }()
   
-  lazy var todoTextView: UITextView = {
+  private lazy var todoTextView: UITextView = {
     let tv = UITextView()
     tv.font = .preferredFont(forTextStyle: .body)
     tv.delegate = self
@@ -62,6 +62,7 @@ final class AddTodoView: UIView {
     super.init(frame: frame)
     self.backgroundColor = .white
     setAutolayout()
+    updateSelectedDateLabel()
   }
   
   required init?(coder: NSCoder) {
@@ -130,5 +131,8 @@ extension AddTodoView {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .medium
     selectedDateLabel.text = dateFormatter.string(from: date)
+  }
+  func getTodoText() -> String {
+    return todoTextView.text
   }
 }

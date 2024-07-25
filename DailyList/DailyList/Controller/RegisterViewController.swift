@@ -16,8 +16,8 @@ final class RegisterViewController: UIViewController {
 // MARK: - Add Target
 extension RegisterViewController {
   private func setButtonAddTarget() {
-    registerView.cancelButton.addTarget(self, action: #selector(tappedCancelButton), for: .touchUpInside)
-    registerView.creatAccountButton.addTarget(self, action: #selector(tappedCreateAccountButton), for: .touchUpInside)
+    registerView.setCancelButtonTarget(target: self, action: #selector(tappedCancelButton), for: .touchUpInside)
+    registerView.setCreateAccountButtonTarget(target: self, action: #selector(tappedCreateAccountButton), for: .touchUpInside)
   }
   
   @objc private func tappedCancelButton() {
@@ -26,13 +26,13 @@ extension RegisterViewController {
   
   @objc private func tappedCreateAccountButton() {
     guard
-      let userName = registerView.nameTextField.text,
-      let email = registerView.emailTextField.text,
-      let password = registerView.checkPasswordTextField.text
+      let userName = registerView.getName(),
+      let email = registerView.getEmail(),
+      let password = registerView.getPassword()
     else {
       return
     }
-    
+  
     Task {
       do {
         let endpoint = RegisterEndpoint(username: userName, email: email, password: password)

@@ -16,8 +16,8 @@ final class ForgotPasswordViewController: UIViewController {
 // MARK: - Add Target
 extension ForgotPasswordViewController {
   private func setButtonAddTarget() {
-    forgotPasswordView.cancelButton.addTarget(self, action: #selector(tappedCancelButton), for: .touchUpInside)
-    forgotPasswordView.sendButton.addTarget(self, action: #selector(tappedSendButton), for: .touchUpInside)
+    forgotPasswordView.setCancelButtonTarget(target: self, action: #selector(tappedCancelButton), for: .touchUpInside)
+    forgotPasswordView.setSendButtonTarget(target: self, action: #selector(tappedSendButton), for: .touchUpInside)
   }
   
   @objc private func tappedCancelButton() {
