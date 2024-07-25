@@ -4,6 +4,7 @@ final class NetworkService: NetworkServiceProtocol {
   static let shared = NetworkService()
   private init() {}
   
+  @discardableResult
   func makeURLRequest<T: APIEndpointProtocol>(endpoint: T) async throws -> Data {
     guard var urlComponents = URLComponents(string: endpoint.url) else {
       throw NetworkError.invalidURL
