@@ -3,7 +3,7 @@ import Foundation
 extension Date {
   static func todayAsString() -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.dateStyle = .medium
     return dateFormatter.string(from: Date())
   }
 }
