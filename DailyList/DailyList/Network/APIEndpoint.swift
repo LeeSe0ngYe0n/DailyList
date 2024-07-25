@@ -1,12 +1,12 @@
 import Foundation
 
 struct UserInfoEndpoint: APIEndpointProtocol {
-  let path: String = "/auth/users"
+  let path: String = "/api/auths/users"
   let method: HTTPMethod = .get
 }
 
 struct LoginEndpoint: APIEndpointProtocol {
-  let path: String = "/auth/login"
+  let path: String = "/api/auths/login"
   let method: HTTPMethod = .post
   let loginData: LoginData
   var body: Data? {
@@ -15,7 +15,7 @@ struct LoginEndpoint: APIEndpointProtocol {
 }
 
 struct RegisterEndpoint: APIEndpointProtocol {
-  let path: String = "/auth/register"
+  let path: String = "/api/auths/register"
   let method: HTTPMethod = .post
   let username: String
   let email: String
